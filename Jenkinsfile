@@ -19,5 +19,10 @@ pipeline {
                 }
             }
         }
+        stage('Package_Docker') {
+            steps {
+                sh 'docker build . -t my_python_rest_api'
+            }
+        }
     }
 }
