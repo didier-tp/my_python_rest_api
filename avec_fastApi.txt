@@ -2,7 +2,7 @@ avec fastApi:
 -------
 
 install:
-python -m pip install fastapi[standard] uvicorn
+python -m pip install fastapi[standard] uvicorn httpx
 python -m pip install pytest
 
 pip freeze > big_requirements.txt
