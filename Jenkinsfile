@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '. venv/bin/activate && python -m pip install -r requirements.txt'
+                sh 'virtualenv venv && . venv/bin/activate && python -m pip install -r requirements.txt'
                 //stash(name: 'compiled-results', includes: 'sources/*.py*')
                 echo 'build'
             }
