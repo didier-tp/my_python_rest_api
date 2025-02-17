@@ -21,7 +21,9 @@ pipeline {
         }
         stage('Package_Docker') {
             steps {
-                sh 'docker build . -t my_python_rest_api'
+                //sh 'docker build . -t my_python_rest_api'
+                //with Pipeline docker plugin:
+                app = docker.build("my_python_rest_api")
             }
         }
     }
