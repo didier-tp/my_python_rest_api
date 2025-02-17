@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 //sh 'python -m venv venv'
-                sh 'python -m venv .venv && source .venv/bin/activate && python -m pip install -r requirements.txt'
+                sh 'python -m venv .venv && . .venv/bin/activate && python -m pip install -r requirements.txt'
                 //stash(name: 'compiled-results', includes: 'sources/*.py*')
                 echo 'build'
             }
