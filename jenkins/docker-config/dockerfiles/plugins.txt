@@ -55,7 +55,6 @@ pipeline-rest-api:2.35
 pipeline-stage-step:312.v8cd10304c27a_
 pipeline-stage-tags-metadata:2.2221.vc657003fb_d93
 pipeline-stage-view:2.35
-pipeline-docker:1.29
 plain-credentials:183.va_de8f1dd5a_2b_
 plugin-util-api:6.0.0
 resource-disposer:0.25
