@@ -1,11 +1,11 @@
 pipeline {
     agent any
 	environment{
-	    #NB: credential_dockerhub_didierdefrance69 is ID of credential
-		#prepared in "Admin Jenkins / Credentials / system /global"
+	    //NB: credential_dockerhub_didierdefrance69 is ID of credential
+		//prepared in "Admin Jenkins / Credentials / system /global"
 		dockerhub_credentials='credential_dockerhub_didierdefrance69'
 		
-		#default/empty dockerRegistry is dockerhub
+		//default/empty dockerRegistry is dockerhub
 		docker_registry= ''
 		
 		docker_image_name='didierdefrance69/my_rest_api:1'
