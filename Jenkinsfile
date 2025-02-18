@@ -23,9 +23,9 @@ pipeline {
             steps {
                 //sh 'docker build -t my_rest_api:1 .'
                 //with Pipeline docker plugin:
-				node{
-					app = docker.build("my_rest_api:1")
-				}
+		script{
+			dockerImage = docker.build "my_rest_api:1"
+		      }
             }
         }
     }
