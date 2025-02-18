@@ -28,9 +28,6 @@ RUN pip install pytest
 # Add the PATH environment variable to /etc/environment so that it is available to all users and processes.
 RUN echo "PATH=${PATH}" >> /etc/environment
 
-#install docker-ce on this agent in order to build and push image from jenkins
-RUN apt-get update && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io 
-
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
 # This ensures that the Jenkins user has the necessary permissions to access its home directory.
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
