@@ -1,3 +1,5 @@
+cd ..
+
 #create virtualenv:
 python -m venv .venv
 
