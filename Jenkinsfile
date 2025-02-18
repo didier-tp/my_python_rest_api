@@ -21,9 +21,11 @@ pipeline {
         }
         stage('Package_Docker') {
             steps {
-                //sh 'docker build . -t my_python_rest_api'
+                //sh 'docker build -t my_rest_api:1 .'
                 //with Pipeline docker plugin:
-                app = docker.build("my_python_rest_api")
+				node{
+					app = docker.build("my_rest_api:1")
+				}
             }
         }
     }
