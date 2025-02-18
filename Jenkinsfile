@@ -29,21 +29,9 @@ pipeline {
         }
         stage('build_docker_image') {
             steps {
-                //sh 'docker build -t my_rest_api:1 .'
+                sh 'docker build -t my_rest_api:1 .'
                 //with Pipeline docker plugin:
-				script{
-					dockerImage = docker.build docker_image_name
-					  }
 				  }
-        }
-		stage('push_docker_image') {
-            steps {
-			  script{
-                docker.withRegistry( docker_registry, dockerhub_credentials ) { 
-                        dockerImage.push() 
-                    }
-				}
-			}
         }
     }
 }
