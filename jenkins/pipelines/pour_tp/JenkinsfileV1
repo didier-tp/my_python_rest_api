@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+	    stage('from_git') {
+            steps {
+                  git url : 'https://github.com/didier-tp/my_python_rest_api' , branch : 'main'
+            }
+        }
+        stage('Build') {
+            steps {
+				echo 'build python with .venv settings'
+                //sh 'python .....'
+				sh 'python basic.py'
+            }
+        }
+		stage('Test') {
+            steps {
+				echo 'test python (pytest) with .venv settings'
+                sh '.... && pytest ....'
+				sh 'pytest test_basic.py'
+            }
+        }
+    }
+}
