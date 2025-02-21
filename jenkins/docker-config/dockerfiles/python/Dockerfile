@@ -40,6 +40,11 @@ RUN install -m 0755 -d /etc/apt/keyrings &&\
   apt-get update &&\
   apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+#ensures that /var/run/docker.sock exists & changes  ownership & gives jenkins user permissions to access /var/run/docker.sock
+RUN touch /var/run/docker.sock &&\
+	chown root:docker /var/run/docker.sock &&
+	usermod -a -G docker jenkins
+
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
 # This ensures that the Jenkins user has the necessary permissions to access its home directory.
 RUN chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"

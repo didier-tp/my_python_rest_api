@@ -98,6 +98,7 @@ services:
   python:
     build: dockerfiles/python/.
     container_name: desktop-jenkins_agent-1-python
+    privileged: true
     profiles:
       - python
     depends_on:
@@ -112,6 +113,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - agent-ssh-dir:/home/jenkins/.ssh:ro # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
   node:
     build: dockerfiles/node/.
