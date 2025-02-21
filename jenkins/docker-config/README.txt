@@ -15,12 +15,13 @@ RUN touch /var/run/docker.sock &&\
 	chown root:docker /var/run/docker.sock &&\
         chmod 777 /var/run/docker.sock &&\
 	usermod -a -G docker Jenkins
+et eventuellement
+RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.sock
 
 * dans le docker-compose.yaml
       volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-     et si besoin
-      privileged: true
+     
 
 --------------
 Rappel : pour debug de container :  docker container exec -ti xyz_container sh
