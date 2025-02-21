@@ -33,17 +33,9 @@ pipeline {
                 //with Pipeline docker plugin:
 				script{
 					dockerImage = docker.build docker_image_name
+					dockerImage.push() 
 					  }
 				  }
-        }
-		stage('push_docker_image') {
-            steps {
-			  script{
-                docker.withRegistry( docker_registry, dockerhub_credentials ) { 
-                        dockerImage.push() 
-                    }
-				}
-			}
         }
     }
 }
