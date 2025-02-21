@@ -3,9 +3,9 @@ pipeline {
 	environment{
 	    //NB: credential_dockerhub_didierdefrance69 is ID of credential
 		//prepared in "Admin Jenkins / Credentials / system /global"
-		dockerhub_credentials='credential_dockerhub_didierdefrance69'
+		dockerhub_credential_id='credential_dockerhub_didierdefrance69'
 		
-		//dockerRegistry is dockerhub
+		//default/empty dockerRegistry is dockerhub
 		docker_registry= 'https://registry.hub.docker.com'
 		
 		docker_image_name='didierdefrance69/my_rest_api:1'
@@ -28,21 +28,23 @@ pipeline {
             }
         }
         stage('build_docker_image') {
-            steps {
-                //sh 'docker build -t my_rest_api:1 .'
-                //with Pipeline docker plugin:
-				script{
-					dockerImage = docker.build docker_image_name
-					  }
+            //sh 'docker build -t my_rest_api:1 .'
+            //with Pipeline docker plugin:
+			script{
+				    echo "docker_image_name=" + docker_image_name
+					dockerImage = docker.build(docker_image_name)
 				  }
         }
 		stage('push_docker_image') {
             steps {
 			  script{
-                docker.withRegistry( docker_registry, dockerhub_credentials ) { 
-                        dockerImage.push() 
-                    }
-				}
+					echo "docker_registry=" + docker_registry
+					echo "dockerhub_credential_id=" +dockerhub_credential_id
+					docker.withRegistry( docker_registry, dockerhub_credential_id ) { 
+					     dockerImage.push() 
+						 }
+					  }
+				  }
 			}
         }
     }
