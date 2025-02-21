@@ -13,6 +13,7 @@ comporte docker-ce (Inside debian) et comme en plus on se retrouve en mode "dock
 #ensures that /var/run/docker.sock exists & changes  ownership & gives jenkins user permissions to access /var/run/docker.sock
 RUN touch /var/run/docker.sock &&\
 	chown root:docker /var/run/docker.sock &&\
+        chmod 777 /var/run/docker.sock &&\
 	usermod -a -G docker Jenkins
 
 * dans le docker-compose.yaml
