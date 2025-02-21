@@ -28,12 +28,16 @@ pipeline {
             }
         }
         stage('build_docker_image') {
-            steps {
-                //sh 'docker build -t my_rest_api:1 .'
-                //with Pipeline docker plugin:
-				script{
+            //sh 'docker build -t my_rest_api:1 .'
+            //with Pipeline docker plugin:
+			script{
 				    echo "docker_image_name=" + docker_image_name
 					dockerImage = docker.build(docker_image_name)
+				  }
+        }
+		stage('push_docker_image') {
+            steps {
+			  script{
 					echo "docker_registry=" + docker_registry
 					echo "dockerhub_credential_id=" +dockerhub_credential_id
 					docker.withRegistry( docker_registry, dockerhub_credential_id ) { 
@@ -41,6 +45,7 @@ pipeline {
 						 }
 					  }
 				  }
+			}
         }
     }
 }
