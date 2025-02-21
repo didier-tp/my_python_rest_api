@@ -18,5 +18,6 @@ RUN touch /var/run/docker.sock &&\
 * dans le docker-compose.yaml
       volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      et si besoin 
-      privileged: true
+
+--------------
+Rappel : pour debug de container :  docker container exec -ti xyz_container sh
