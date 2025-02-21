@@ -98,7 +98,7 @@ services:
   python:
     build: dockerfiles/python/.
     container_name: desktop-jenkins_agent-1-python
-    #privileged: true
+    privileged: true
     profiles:
       - python
     depends_on:
