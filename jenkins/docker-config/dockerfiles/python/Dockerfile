@@ -42,7 +42,7 @@ RUN install -m 0755 -d /etc/apt/keyrings &&\
 
 #ensures that /var/run/docker.sock exists & changes  ownership & gives jenkins user permissions to access /var/run/docker.sock
 RUN touch /var/run/docker.sock &&\
-	chown root:docker /var/run/docker.sock &&
+	chown root:docker /var/run/docker.sock &&\
 	usermod -a -G docker jenkins
 
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
