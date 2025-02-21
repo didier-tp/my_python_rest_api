@@ -6,7 +6,7 @@ pipeline {
 		dockerhub_credential_id='credential_dockerhub_didierdefrance69'
 		
 		//default/empty dockerRegistry is dockerhub
-		docker_registry= ''
+		docker_registry= 'https://registry.hub.docker.com'
 		
 		docker_image_name='didierdefrance69/my_rest_api:1'
 	}
@@ -32,8 +32,10 @@ pipeline {
                 //sh 'docker build -t my_rest_api:1 .'
                 //with Pipeline docker plugin:
 				script{
-					dockerImage = docker.build docker_image_name
-					echo dockerhub_credential_id
+				    echo "docker_image_name=" + docker_image_name
+					dockerImage = docker.build(docker_image_name)
+					echo "docker_registry=" + docker_registry
+					echo "dockerhub_credential_id=" +dockerhub_credential_id
 					docker.withRegistry( docker_registry, dockerhub_credential_id ) { 
 					     dockerImage.push() 
 						 }
