@@ -3,7 +3,7 @@ pipeline {
 	environment{
 	    //NB: credential_dockerhub_didierdefrance69 is ID of credential
 		//prepared in "Admin Jenkins / Credentials / system /global"
-		dockerhub_credentials='credential_dockerhub_didierdefrance69'
+		dockerhub_credential_id='credential_dockerhub_didierdefrance69'
 		
 		//default/empty dockerRegistry is dockerhub
 		docker_registry= ''
@@ -33,7 +33,10 @@ pipeline {
                 //with Pipeline docker plugin:
 				script{
 					dockerImage = docker.build docker_image_name
-					dockerImage.push() 
+					echo dockerhub_credential_id
+					docker.withRegistry( docker_registry, dockerhub_credential_id ) { 
+					     dockerImage.push() 
+						 }
 					  }
 				  }
         }

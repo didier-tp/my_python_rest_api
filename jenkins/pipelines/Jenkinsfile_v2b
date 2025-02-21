@@ -5,8 +5,8 @@ pipeline {
 		//prepared in "Admin Jenkins / Credentials / system /global"
 		dockerhub_credentials='credential_dockerhub_didierdefrance69'
 		
-		//default/empty dockerRegistry is dockerhub
-		docker_registry= ''
+		//dockerRegistry is dockerhub
+		docker_registry= 'https://registry.hub.docker.com'
 		
 		docker_image_name='didierdefrance69/my_rest_api:1'
 	}
