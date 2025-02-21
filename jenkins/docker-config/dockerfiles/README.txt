@@ -1,0 +1,1 @@
+le plugin "Docker pipeline" se télécharge via l'alias docker-workflow et par exemple en version 596.v3e6972b_46b_e2
