@@ -44,8 +44,6 @@ RUN install -m 0755 -d /etc/apt/keyrings &&\
 RUN touch /var/run/docker.sock &&\
 	chown root:docker /var/run/docker.sock &&\
 	usermod -a -G docker jenkins
-	
-RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.sock
 
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
 # This ensures that the Jenkins user has the necessary permissions to access its home directory.
