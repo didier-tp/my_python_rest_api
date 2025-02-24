@@ -18,7 +18,7 @@ class DeviseService(metaclass=Singleton):
         return listeDevises;
 
     def getDeviseById(self , id ):
-        return self.devisesDict.get(id);
+        return self.devisesDictz.get(id);
 
     def createDevise(self , dev: Devise):
         key = dev.code;
