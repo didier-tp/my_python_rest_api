@@ -13,7 +13,7 @@ class DeviseService(metaclass=Singleton):
         self.devisesDict["GBP"] = Devise('GBP', 'Livre', 0.9)
 
     def getDevises(self):
-        listeDevises = list(self.devisesDict.values());
+        listeDevises = list(self.devisesDictz.values());
         print(">>> listeDevises=", listeDevises);
         return listeDevises;
 
