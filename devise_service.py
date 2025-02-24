@@ -16,31 +16,47 @@ def linesValuesToDeviseObjects(listeValeursDeLigne):
 
 class DeviseService(metaclass=Singleton):
     def __init__(self):
-        print("...")
+        print("DeviseService via/with sqlLite")
 
     def getDevises(self):
-        #listeDevises = []
         with sqlite3.connect("devises.db") as connection:
             cursor = connection.cursor()
             listeDevises = linesValuesToDeviseObjects( cursor.execute(
                 "SELECT * FROM devise").fetchall())  # or .fetchone()
-
         print(">>> listeDevises=", listeDevises)
         return listeDevises;
 
     def getDeviseById(self , id ):
-        return None;
+        with sqlite3.connect("devises.db") as connection:
+            cursor = connection.cursor()
+            devise = columnsValuesToDeviseObject(cursor.execute(
+                "SELECT * FROM devise WHERE code='"+id+"'").fetchone())
+        print(">>> devise for id=" ,id , "=", devise)
+        return devise
 
     def createDevise(self , dev: Devise):
         key = dev.code;
+        reqSql= "INSERT INTO devise(code, name, change) VALUES('" + dev.code + "', '" + dev.name + "'," + str(dev.change) + ")"
+        print(">>> createDevise sql=", reqSql)
+        with sqlite3.connect("devises.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute(reqSql)
 
 
     def updateDevise(self, dev: Devise):
         key = dev.code;
+        reqSql = "UPDATE devise SET name='" + dev.name + "' , change=" + str(dev.change) + "  WHERE code='" + key + "'"
+        print(">>> updateDevise sql=", reqSql)
+        with sqlite3.connect("devises.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute(reqSql)
 
-
-    def saveDevise(self , dev : Devise ):
-        print("ok")
 
     def deleteDeviseById(self, id):
-        return None
+        deletedDevise = self.getDeviseById(id);
+        reqSql = "DELETE FROM devise WHERE code='" + id + "'"
+        print(">>> deleteDeviseById sql=", reqSql)
+        with sqlite3.connect("devises.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute(reqSql)
+        return deletedDevise;
