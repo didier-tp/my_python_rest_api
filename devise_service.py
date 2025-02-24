@@ -1,41 +1,46 @@
 from devise import Devise
-
+import sqlite3
 from singleton import Singleton
 
 #version simulee sans base de données , simple map/dictionnary en memoire
 
+def columnsValuesToDeviseObject(listeValeursDeColonne):
+    return Devise( listeValeursDeColonne[0] , listeValeursDeColonne[1]  , listeValeursDeColonne[2] );
+
+def linesValuesToDeviseObjects(listeValeursDeLigne):
+    devises=[]
+    for elt in listeValeursDeLigne:
+        devises.append(columnsValuesToDeviseObject(elt))
+    return devises;
+
+
 class DeviseService(metaclass=Singleton):
     def __init__(self):
-        self.devisesDict = {};
-        self.devisesDict["EUR"] = Devise('EUR', 'Euro', 1)
-        self.devisesDict["USD"] = Devise('USD', 'Dollar', 1.1)
-        self.devisesDict["JPY"] = Devise('JPY', 'Yen', 130)
-        self.devisesDict["GBP"] = Devise('GBP', 'Livre', 0.9)
+        print("...")
 
     def getDevises(self):
-        listeDevises = list(self.devisesDict.values());
-        print(">>> listeDevises=", listeDevises);
+        #listeDevises = []
+        with sqlite3.connect("devises.db") as connection:
+            cursor = connection.cursor()
+            listeDevises = linesValuesToDeviseObjects( cursor.execute(
+                "SELECT * FROM devise").fetchall())  # or .fetchone()
+
+        print(">>> listeDevises=", listeDevises)
         return listeDevises;
 
     def getDeviseById(self , id ):
-        return self.devisesDict.get(id);
+        return None;
 
     def createDevise(self , dev: Devise):
         key = dev.code;
-        if key in self.devisesDict:
-            raise Exception("conflict : an existing Devise have same key/code:"+key );
-        else:
-            self.saveDevise(dev);
+
 
     def updateDevise(self, dev: Devise):
         key = dev.code;
-        if key in self.devisesDict:
-            self.saveDevise(dev);
-        else:
-            raise Exception("cannot update : no Devise found for key/code:"+ key);
+
 
     def saveDevise(self , dev : Devise ):
-        self.devisesDict[dev.code]=dev;
+        print("ok")
 
     def deleteDeviseById(self, id):
-        return self.devisesDict.pop(id,None);
+        return None
