@@ -1,0 +1,51 @@
+Sur une machine (virtuelle) linux de type debian ou Ubuntu (fonctionnant avec VirtualBox ou WSL2)
+on pourra enchaîner les installations suivantes:
+1) installer si besoin GIT (apt install git , git config ...)
+   et vérifier via git --version
+
+2) se placer quelque part sur la machine virtuelle linux (ex: /home/xyz/tp)
+   puis cloner le référentiel git qui comporte "petite-appli" plus "config docker-jenkins"
+   via git clone https://github.com/didier-tp/my_python_rest_api
+
+3) installer docker et docker-compose en lançant
+   sudo sh install-docker.sh (ou un équivalent)
+   où install-docker.sh est un script que l'on pourra trouver dans 
+   my_python_rest_api/scripts/debian ou bien .../scripts/ubuntu
+   NB: selon OS exact (debian ou ubuntu) , il faudra peut être se déconnecter/reconnecter
+   pour que votre compte linux soit bien associé au groupe "docker" permettant
+   de lancer docker sans sudo.
+   Vérifications: docker ps
+                  docker compose ps
+
+4) lancer l'installation de jenkins via docker compose en procédant de cette manière:
+    - se placer dans le répertoire .../my_python_rest_api/jenkins/docker-config
+    - vérifier que ce répertoire comporte bien le fichier docker-compose.yaml ainsi 
+      que le sous réperoire dockerfiles (contenant lui même plein de choses)
+    - lire de fichier README.txt et lancer la commande suivante:
+     docker compose --profile python up -d
+    - verifier le bon démarrage de jenkins (partie controller + partie agent pour python)
+     via la commande docker container ls .
+
+5) lancer un navigateur pouvant accéder aux serveurs démarrés au sein de la VM linux
+   et depuis celui-ci spécifier l'URL suivante http://localhost:8080
+   s'identifier eb tant qu'admin via admin/admin
+
+6) utiliser la console de Jenkins pour configurer un item/job de type "pipeline"
+   en mode "pipeline script" ou bien "pipeline from scm":
+   URL GIT : https://github.com/didier-tp/my_python_rest_api , branch : main 
+   on pourra s'inspirer des exemples du répertoire .../my_python_rest_api/jenkins/pipeline
+
+NB:
+   après un redémarrage complet de la VM linux , on pourra éventuellement relancer
+   docker compose --profile python up -d si docker ps montre que l'agent n'a pas redémarré.
+   -------
+   Si besoin de tout arrâter/ré-initialiser du coté jenkins:
+   docker compose --profile python down -v --remove-orphans
+   -----------
+   Si besoin de peaufiner un agent de Jenkins:
+   - arrêter les choses via docker compose … down …
+   - supprimer l'ancienne image de l'agent (via docker image rm ….)
+   - améliorer si besoin dockerfiles/xyz/Dockerfile et docker-compose.yaml
+   - relancer  docker compose --profile python up -d 
+   - vérifier le bon/meilleur fonctionnement au niveau des jobs de jenkins
+
