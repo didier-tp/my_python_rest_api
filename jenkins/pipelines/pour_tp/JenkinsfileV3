@@ -11,6 +11,11 @@ pipeline {
 		docker_image_name='comptexyz/my_rest_api:1'
 	}
     stages {
+	    stage('from_git') {
+            steps {
+                  git url : 'https://github.com/didier-tp/my_python_rest_api' , branch : 'main'
+            }
+        }
         stage('build') {
             steps {
                 sh 'python -m venv .venv && . .venv/bin/activate && python -m pip install -r requirements.txt'
