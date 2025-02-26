@@ -56,7 +56,7 @@ RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.s
 
 COPY my_entrypoint.sh my_entrypoint.sh
 
-ENTRYPOINT ["my_entrypoint.sh"]
+ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
 
 
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
