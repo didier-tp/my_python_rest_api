@@ -1,0 +1,149 @@
+QCM GIT , DevOps , CI/CD , Jenkins, Docker
+========================================
+NB: réponses de type "1A , 2B , 3C , …" a envoyer (avec vos "prénoms et nom") à l'adresse email suivante: didier@d-defrance.fr)
+========================================
+1) que signifie le sigle devOps?
+A) un dev qui après un bug dit oups ...
+B) un jeu: c'est de la faute de l'autre équipe "dev" ou "ops"
+C) une automatisation de l'enchaînement des activités de développement et de mise en production 
+D) le passage de relais du code des "dev" vers les "ops" : une des grandes cérémonies "SCRUM"
+
+2) dans un cadre "devOps", que signifie "CD" ?
+A) change directory 
+B) compact disc 
+C) continuous delivery/deployment
+D) canal direct
+
+3) que signifie "intégration continue" ?
+A) calcul mathématique d'intégrales en continu.
+B) bonne pratique agile : intégrer les nouveaux collaborateurs en continu 
+C) intégrer en continu le bon code validé par des tests réussis
+D) intégrer les résultats au fur et à mesure de la production via un canal "web-socket"
+
+4) quelle commande git pour changer de branche?
+A) git checkout brancheXy
+B) git branch brancheXy
+C) git change brancheXy
+D) git switch-to brancheXy
+
+5) comment afficher l'historique d'un projet git  ?
+A) git show-history 
+B) git log
+C) git history
+D) git sum-up
+
+6) comment administrer simplement Jenkins ?
+A) via une console d'admin (via un navigateur)
+B) via une api REST 
+C) via des scripts ".sh"
+D) via un script python
+
+7) comment lancer un conteneur docker?
+A) docker launch ....
+B) docker run ....
+C) docker execute ....
+D) docker up ...
+
+8) comment appelle t-on le code d'un conteneur docker?
+A) un  bundle
+B) une archive exécutable 
+C) une image
+D) une librairie
+
+9) quel type de code dans un conteneur docker?
+A) n'importe quel langage et type de logiciel 
+B) du code java
+C) du code JavaScript 
+C) du code python
+
+10) avantages du pipeline Jenkins ?
+A) ça peut acheminer des énergies (pétrole, gaz, ...)
+B) la configuration d'un job est centralisée dans un script et pas disséminée au 4 coins d'une config de la console d'administration .
+C) réutilisation possible des pipes d'angular
+D) on peut les enchainer directement via des pipes de sh/bash 
+
+11) particularité principale d'un nightly build ?
+A) plus long, plus poussé (variante)
+B) réutilisation de la config de visual-studio-code
+C) lancé manuellement à 3h du matin par un administrateur insomniaque .
+D) jamais exposé au grand jour (pour des choses secrètes et inavouables)
+
+12) intérêt principal de docker-compose?
+A) scripts bien décomposés (fonctions, sous fonctions, …)
+B) configurer un lancement cohérent de plusieurs containers dockers prévus pour communiquer entre eux
+C) composition automatique d'une adresse IP via DHCP
+D) recomposer une image depuis plusieurs sous parties (layers)
+
+13) commande "python" pour  lancer des tests ?
+A) python launch-test ...
+B) py unit-test ...
+C) pipotron test-moi-cela ...
+D) pytest ...
+
+14) comment afficher la liste de tous les conteneurs dockers ?
+A) docker-compose liste
+B) docker container ls -a
+C) dock list -a
+C) docker display --all
+
+15) à quoi sert la commande docker pull ?
+A) à récupérer une config docker via git 
+B) à télécharger une image docker
+C) a récupérer la liste des conteneurs disponibles 
+D) à bien installer docker sous linux (mieux que apt install)
+
+16) possibilité intéressante de Jenkins ?
+A) envoyer mail aux développeurs si échec d'un job/build.
+B) reconfiguration automatique 
+C) code généré depuis diagramme uml
+D) crypter le code source
+
+17) commande git pour envoyer son code dans un référentiel partagé ?
+A) git send 
+B) git share
+C) git push 
+D) git publish 
+
+18) commande git pour enregistrer la fin d'un conflit sur un fichier après un début de merge ?
+A) git end-conflict ficXy
+B) git ok ficXy
+C) git add ficXy
+D) git merge-ok ficXy
+
+19)  quel est le gros avantage d'un linux en mode texte pour la prod ?
+A) syntaxe claire (pas abrégée)
+B) ide confortable 
+C) consomme peu de mémoire vive
+D) s'énerver et maudir "Linus Torvalds"
+
+20) vers où faut-il envoyer une image docker ?
+A) un référentiel GIT 
+B) vers une boîte mail (celle du chef de projet)
+C) un référentiel spécifique à un langage (java , python, js, php, ….)
+D) docker registry (ex: docker-hub) 
+
+
+-----------------------
+
+Autres questions (un peu trop faciles, qui ne compteront pas):
+
+21) comment construire une image docker?
+A) docker build et fichier Dockerfile
+B) docker image make
+C) photographier un docker dans un port
+
+22) d'où vient docker?
+A) du monde Microsoft/windows 
+B) du monde linux
+C) du monde maritime en tique (informatique de la gestion de conteneurs dans les ports)
+
+23) à quoi sert Jenkins ?
+A) à gérer intégration continue et la suite.
+B) a gérer la logistique 
+C) à modéliser un système informatique 
+
+24) à quoi sert l'intelligence artificielle ?
+A) à compenser la stupidité humaine
+B) ….
+C) ... 
+
