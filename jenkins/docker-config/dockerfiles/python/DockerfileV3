@@ -46,18 +46,6 @@ RUN touch /var/run/docker.sock &&\
 	usermod -a -G docker jenkins
 	
 RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.sock
-#Probleme a resoudre : RUN .... a un inpact sur le contenu de l'image
-#mais pas sur l'initiation du conteneur
-#et donc setfacl --modify user:jenkins:rw /var/run/docker.sock
-#est déclenché trop tôt
-# faudrait un CMD  setfacl --modify user:jenkins:rw /var/run/docker.sock
-#mais il y a peut être déjà un CMD ... (ou entrypoint ...)
-#dans l'image de base jenkins/ssh-agent:6.9.0
-
-COPY my_entrypoint.sh my_entrypoint.sh
-
-ENTRYPOINT ["my_entrypoint.sh"]
-
 
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
 # This ensures that the Jenkins user has the necessary permissions to access its home directory.
