@@ -54,6 +54,7 @@ RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.s
 #mais il y a peut être déjà un CMD ... (ou entrypoint ...)
 #dans l'image de base jenkins/ssh-agent:6.9.0
 
+COPY init_docker_access.sh init_docker_access.sh
 COPY my_entrypoint.sh my_entrypoint.sh
 
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
