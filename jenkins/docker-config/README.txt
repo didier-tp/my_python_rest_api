@@ -10,13 +10,10 @@ NB: pour que l'on puisse déclencher une construction d'image docker depuis l'ag
 comporte docker-ce (Inside debian) et comme en plus on se retrouve en mode "docker in docker" , il faut effectuer les réglages suivants:
 * dans Dockerfile de l'agent Jenkins:
 
-#ensures that /var/run/docker.sock exists & changes  ownership & gives jenkins user permissions to access /var/run/docker.sock
-RUN touch /var/run/docker.sock &&\
-	chown root:docker /var/run/docker.sock &&\
-        chmod 777 /var/run/docker.sock &&\
-	usermod -a -G docker Jenkins
-et eventuellement
-RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.sock
+RUN apt-get install -y acl 
+et
+ setfacl --modify user:jenkins:rw /var/run/docker.sock
+dans entrypoint
 
 * dans le docker-compose.yaml
       volumes:
@@ -25,3 +22,4 @@ RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.s
 
 --------------
 Rappel : pour debug de container :  docker container exec -ti xyz_container sh
+docker container exec -ti xyz_container sh

@@ -29,7 +29,6 @@ RUN pip install pytest
 RUN echo "PATH=${PATH}" >> /etc/environment
 
 #install docker-ce on this agent in order to build and push image from jenkins
-#install docker-ce on this agent in order to build and push image from jenkins
 RUN install -m 0755 -d /etc/apt/keyrings &&\
 	curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc &&\
 	chmod a+r /etc/apt/keyrings/docker.asc &&\
@@ -38,27 +37,17 @@ RUN install -m 0755 -d /etc/apt/keyrings &&\
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null &&\
   apt-get update &&\
-  apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  apt-get install -y --no-install-recommends acl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-#ensures that /var/run/docker.sock exists & changes  ownership & gives jenkins user permissions to access /var/run/docker.sock
-RUN touch /var/run/docker.sock &&\
-	chown root:docker /var/run/docker.sock &&\
-	usermod -a -G docker jenkins
-	
-RUN apt-get install -y acl && setfacl --modify user:jenkins:rw /var/run/docker.sock
-#Probleme a resoudre : RUN .... a un inpact sur le contenu de l'image
-#mais pas sur l'initiation du conteneur
-#et donc setfacl --modify user:jenkins:rw /var/run/docker.sock
-#est déclenché trop tôt
-# faudrait un CMD  setfacl --modify user:jenkins:rw /var/run/docker.sock
-#mais il y a peut être déjà un CMD ... (ou entrypoint ...)
-#dans l'image de base jenkins/ssh-agent:6.9.0
-
+#gives jenkins user permissions to access /var/run/docker.sock
+#via setfacl --modify user:jenkins:rw /var/run/docker.sock
+#in init_docker_access.sh
 COPY init_docker_access.sh init_docker_access.sh
+
+# override entrypoint of inherited jenkins/ssh-agent:6.9.0 
+# my_entrypoint.sh = call init_docker_access.sh and call setup-sshd
 COPY my_entrypoint.sh my_entrypoint.sh
-
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
-
 
 # Set the ownership of the Jenkins agent home directory to the Jenkins user.
 # This ensures that the Jenkins user has the necessary permissions to access its home directory.
